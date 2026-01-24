@@ -1,4 +1,4 @@
-package com.jairo.projeto_java_web.Application;
+package com.jairo.projeto_java_web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

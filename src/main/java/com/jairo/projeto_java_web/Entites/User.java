@@ -1,9 +1,15 @@
 package com.jairo.projeto_java_web.Entites;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
     private String email;
@@ -14,8 +20,8 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(long id,String nome,String email,String telefone,String senha) {
-        this.id = id;
+    public User(String nome,String email,String telefone,String senha) {
+
         this.nome=nome;
         this.email=email;
         this.telefone=telefone;
