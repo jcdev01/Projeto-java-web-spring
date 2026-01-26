@@ -1,11 +1,13 @@
 package com.jairo.projeto_java_web.Entites;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 @Entity
 @Table(name = "tb_user")
+@JsonPropertyOrder({"id","nome","email","telefone","senha"})
 public class User implements Serializable {
 
     @Id
