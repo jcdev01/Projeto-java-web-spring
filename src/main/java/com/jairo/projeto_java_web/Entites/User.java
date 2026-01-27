@@ -1,9 +1,13 @@
 package com.jairo.projeto_java_web.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
+import org.aspectj.weaver.ast.Or;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 @Entity
 @Table(name = "tb_user")
@@ -17,6 +21,10 @@ public class User implements Serializable {
     private String email;
     private String telefone;
     private String senha;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Order> list=new ArrayList<>();
 
 
     public User() {
@@ -68,6 +76,10 @@ public class User implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public List<Order> getList() {
+        return list;
     }
 
     @Override
