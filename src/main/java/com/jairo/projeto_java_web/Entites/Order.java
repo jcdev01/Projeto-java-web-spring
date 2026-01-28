@@ -1,6 +1,7 @@
 package com.jairo.projeto_java_web.Entites;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.jairo.projeto_java_web.Entites.Enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_order")
-@JsonPropertyOrder({"id","moment","client"})
+@JsonPropertyOrder({"id","moment","client","orderStatus"})
 public class Order implements Serializable {
 
     @Id
@@ -21,13 +22,15 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+    private Integer orderStatus;
 
     public Order() {
     }
 
-    public Order(Instant moment,User client) {
+    public Order(Instant moment,User client,OrderStatus orderStatus) {
         this.moment = moment;
         this.client=client;
+        setOrderStatus(orderStatus);
     }
 
     public Long getId() {
@@ -52,6 +55,14 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOF(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus.getCode();
     }
 
     @Override

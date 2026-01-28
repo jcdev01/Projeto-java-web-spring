@@ -2,7 +2,7 @@ package com.jairo.projeto_java_web.Resource;
 
 
 import com.jairo.projeto_java_web.Entites.User;
-import com.jairo.projeto_java_web.Services.UserServices;
+import com.jairo.projeto_java_web.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 public class UserResource {
 
     @Autowired
-    private UserServices services;
+    private UserService services;
 
 
     @GetMapping
