@@ -1,5 +1,7 @@
 package com.jairo.projeto_java_web.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,7 +20,11 @@ public class Product implements Serializable {
     private String descricao;
     private Double price;
     private String imgUrl;
-    private Set<Category> setlist=new HashSet<>();
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "product_id"),inverseJoinColumns = @JoinColumn(name="category_id"))
+    private Set<Category> categories= new HashSet<>();
 
     public Product() {
     }
@@ -70,8 +76,8 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
-    public Set<Category> getSetlist() {
-        return setlist;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override
