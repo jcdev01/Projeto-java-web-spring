@@ -16,18 +16,16 @@ public class OrderService {
     @Autowired
     private OrderRepository repository;
 
-    public List<Order> findall(){
+    public List<Order> findall() {
 
         return repository.findAll();
     }
 
-    public Order findbyid(Long id){
-        Optional<Order> obj=repository.findById(id);
+    public Order findbyid(Long id) {
+        Optional<Order> obj = repository.findById(id);
         return obj.get();
 
 
     }
-
 }
-
 

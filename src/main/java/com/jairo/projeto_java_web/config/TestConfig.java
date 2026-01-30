@@ -1,15 +1,10 @@
 package com.jairo.projeto_java_web.config;
 
 
-import com.jairo.projeto_java_web.Entites.Category;
+import com.jairo.projeto_java_web.Entites.*;
 import com.jairo.projeto_java_web.Entites.Enums.OrderStatus;
-import com.jairo.projeto_java_web.Entites.Order;
-import com.jairo.projeto_java_web.Entites.Product;
-import com.jairo.projeto_java_web.Entites.User;
-import com.jairo.projeto_java_web.Repositories.CategoryRepository;
-import com.jairo.projeto_java_web.Repositories.OrderRepository;
-import com.jairo.projeto_java_web.Repositories.ProductRepository;
-import com.jairo.projeto_java_web.Repositories.UserRepository;
+import com.jairo.projeto_java_web.Repositories.*;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +31,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -51,8 +49,9 @@ public class TestConfig implements CommandLineRunner {
 
         Order order1 = new Order(Instant.parse("2019-06-20T19:53:07Z"),user1, OrderStatus.WAITING_PAYMENT);
         Order order2 = new Order(Instant.parse("2019-07-21T03:42:10Z"), user2,OrderStatus.DELIVERED);
+        Order order3=new Order(Instant.parse("2019-07-22T15:21:22Z"), user1, OrderStatus.PAID );
 
-        orderRepository.saveAll(Arrays.asList(order1,order2));
+        orderRepository.saveAll(Arrays.asList(order1,order2,order3));
 
         Product product1 = new Product("The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "w");
         Product product2 = new Product("Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "w");
@@ -68,6 +67,17 @@ public class TestConfig implements CommandLineRunner {
         product5.getCategories().add(category2);
 
         productRepository.saveAll(Arrays.asList(product1,product2,product3,product4,product5));
+
+        OrderItem orderItem1 = new OrderItem(order1, product1, 2, product1.getPrice());
+        OrderItem orderItem2 = new OrderItem(order1, product3, 1, product3.getPrice());
+        OrderItem orderItem3 = new OrderItem(order2, product3, 2, product3.getPrice());
+        OrderItem orderItem4 = new OrderItem(order3, product5, 2, product5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(orderItem1,orderItem2,orderItem3,orderItem4));
+
+
+
+
 
 
 

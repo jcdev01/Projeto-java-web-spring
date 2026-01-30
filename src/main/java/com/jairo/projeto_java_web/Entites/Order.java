@@ -1,17 +1,20 @@
 package com.jairo.projeto_java_web.Entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.jairo.projeto_java_web.Entites.Enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
 @Table(name = "tb_order")
-@JsonPropertyOrder({"id","moment","client","orderStatus"})
+
 public class Order implements Serializable {
 
     @Id
@@ -23,6 +26,10 @@ public class Order implements Serializable {
     @JoinColumn(name = "client_id")
     private User client;
     private Integer orderStatus;
+
+
+    @OneToMany(mappedBy = "id.order",fetch = FetchType.EAGER)
+    private Set<OrderItem> items=new HashSet<>();
 
     public Order() {
     }
@@ -63,6 +70,10 @@ public class Order implements Serializable {
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus.getCode();
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override
