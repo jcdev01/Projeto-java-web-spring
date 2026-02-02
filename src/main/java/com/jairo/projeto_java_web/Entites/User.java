@@ -16,11 +16,11 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String nome;
+    private Long id;
+    private String name;
     private String email;
-    private String telefone;
-    private String senha;
+    private String phone;
+    private String password;
 
     @JsonIgnore
     @OneToMany(mappedBy = "client")
@@ -30,12 +30,12 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String nome,String email,String telefone,String senha) {
+    public User(String nome,String email,String phone,String password) {
 
-        this.nome=nome;
+        this.name=nome;
         this.email=email;
-        this.telefone=telefone;
-        this.senha=senha;
+        this.phone=phone;
+        this.password=password;
     }
 
     public long getId() {
@@ -46,12 +46,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setname(String nome) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -62,20 +62,20 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String Password) {
+        this.password = password;
     }
 
     public List<Order> getList() {
@@ -86,11 +86,11 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && Objects.equals(nome, user.nome) && Objects.equals(email, user.email) && Objects.equals(telefone, user.telefone) && Objects.equals(senha, user.senha);
+        return id == user.id && Objects.equals(name,user.name) && Objects.equals(email, user.email) && Objects.equals(phone, user.phone) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, email, telefone, senha);
+        return Objects.hash(id, name, email,phone,password);
     }
 }
