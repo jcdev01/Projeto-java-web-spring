@@ -4,6 +4,7 @@ package com.jairo.projeto_java_web.Resource;
 import com.jairo.projeto_java_web.Entites.User;
 import com.jairo.projeto_java_web.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -48,8 +49,12 @@ public class UserResource {
         user=services.SaveUser(user);
 
         return ResponseEntity.created(uri).body(user);
+    }
 
-
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        services.DeleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
