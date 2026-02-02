@@ -2,7 +2,10 @@ package com.jairo.projeto_java_web.Services;
 
 import com.jairo.projeto_java_web.Entites.User;
 import com.jairo.projeto_java_web.Repositories.UserRepository;
+import com.jairo.projeto_java_web.Services.Exeptions.ResourceNotFoundExeception;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +34,23 @@ public class UserService {
 
     public  void DeleteUser(Long id){
         repository.deleteById(id);
+
+    }
+
+    public User UpdateUser(Long id,User user){
+        User entity = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundExeception("Usuário não encontrado"));
+
+        updatedata(entity, user);
+        return repository.save(entity);
+    }
+
+
+
+    private void updatedata(User entity, User user) {
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
+        entity.setPhone(user.getPhone());
 
     }
 }

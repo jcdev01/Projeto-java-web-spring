@@ -50,7 +50,7 @@ public class User implements Serializable {
         return name;
     }
 
-    public void setname(String nome) {
+    public void setName(String name) {
         this.name = name;
     }
 
