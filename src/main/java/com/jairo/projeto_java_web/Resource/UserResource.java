@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping (value = "/users")
+@RequestMapping (value = "/user")
 public class UserResource {
 
     @Autowired
@@ -46,7 +46,7 @@ public class UserResource {
                 .path("/{id}")
                 .buildAndExpand(user.getId())
                 .toUri();
-        user=services.SaveUser(user);
+
 
         return ResponseEntity.created(uri).body(user);
     }
