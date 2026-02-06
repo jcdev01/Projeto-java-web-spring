@@ -1,6 +1,7 @@
 package com.jairo.projeto_java_web.Resource.Exeptions;
 
 
+import com.jairo.projeto_java_web.Services.Exeptions.DataBaseException;
 import com.jairo.projeto_java_web.Services.Exeptions.ResourceNotFoundExeception;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,13 @@ public class ResourceExceptionHandler {
         StandardError standardError=new StandardError(Instant.now(),status.value(),error,e.getMessage(),request.getRequestURI());
         return ResponseEntity.status(status).body(standardError);
     }
+    @ExceptionHandler(DataBaseException.class)
+    public ResponseEntity<StandardError> DataBaseException(DataBaseException e, HttpServletRequest request) {
+        String error = "Data base error ";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError standardError = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(standardError);
 
 
+    }
 }

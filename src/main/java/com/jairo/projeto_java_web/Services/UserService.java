@@ -2,10 +2,13 @@ package com.jairo.projeto_java_web.Services;
 
 import com.jairo.projeto_java_web.Entites.User;
 import com.jairo.projeto_java_web.Repositories.UserRepository;
+import com.jairo.projeto_java_web.Services.Exeptions.DataBaseException;
 import com.jairo.projeto_java_web.Services.Exeptions.ResourceNotFoundExeception;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +36,15 @@ public class UserService {
     }
 
     public  void DeleteUser(Long id){
-        repository.deleteById(id);
+      try {
+          repository.deleteById(id);
+      }
+      catch (EmptyResultDataAccessException e){
+          throw new ResourceNotFoundExeception(id);
+      }
+      catch (DataIntegrityViolationException e){
+          throw  new DataBaseException(e.getMessage());
+      }
 
     }
 
