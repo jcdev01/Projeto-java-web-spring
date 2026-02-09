@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public List<User> findall(){
@@ -39,7 +43,14 @@ public class UserService {
 
     }
 
-    public User SaveUser(User user){
+
+
+
+
+    public User SaveUser(User user) {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
        return  repository.save(user);
     }
 
