@@ -23,6 +23,7 @@ O objetivo do projeto é fornecer uma API REST para gerenciamento de usuários.
 - Buscar usuário por ID
 - Atualizar dados do usuário
 - Deletar usuário
+- pedidos,pagamentos e etc
 - Criptografia de senha com BCrypt
 
 ---
