@@ -7,7 +7,7 @@ O objetivo do projeto é fornecer uma API REST para gerenciamento de usuários.
 ---
 
 ## ⚙️ Tecnologias utilizadas
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Data JPA
 - PostgreSQL
@@ -30,7 +30,7 @@ O objetivo do projeto é fornecer uma API REST para gerenciamento de usuários.
 
 ## 🛠️ Pré-requisitos
 Antes de rodar o projeto, você precisa ter instalado:
-- Java 17 ou superior
+- Java 21 ou superior
 - Maven
 - PostgreSQL
 - Git
@@ -44,7 +44,40 @@ Antes de rodar o projeto, você precisa ter instalado:
 - Uso apenas para fins de **estudo/portifolio**
 
 
+
+## 🔐 Configuração de variáveis de ambiente
+
+Para executar a aplicação localmente, configure as seguintes variáveis de ambiente para a conexão com o banco de dados:
+
+* `DB_USERNAME` — usuário do PostgreSQL
+* `DB_PASSWORD` — senha do PostgreSQL
+
+Exemplo no Linux / Mac:
+
+```bash
+export DB_USERNAME=seu_usuario
+export DB_PASSWORD=sua_senha
+```
+
+Exemplo no Windows (PowerShell):
+
+```powershell
+setx DB_USERNAME "seu_usuario"
+setx DB_PASSWORD "sua_senha"
+```
+
+A aplicação utiliza essas variáveis no arquivo `application-dev.properties`:
+
+```
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+```
+
+
 ## ▶️ Como executar o projeto localmente
+
+
+
 
 ### 1️⃣ Clone o repositório
 ```bash
